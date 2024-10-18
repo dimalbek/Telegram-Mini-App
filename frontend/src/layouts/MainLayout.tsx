@@ -1,13 +1,11 @@
-
-import { Outlet } from 'react-router';
-import Navbar from '../components/Navbar';
-import { Greeting } from '../pages/Greeting';
+import Navbar from "@/components/Navbar";
+import { Outlet } from "react-router";
 
 const MainLayout = () => {
   return (
-    <div className='w-full  h-full m-auto'>
-        <Greeting />
-        <Outlet/>
+    <div className='w-full h-full m-auto'>
+      <Navbar/>
+      <Outlet/>
     </div>
   )
 }

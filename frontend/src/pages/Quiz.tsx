@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Progress from '@/components/Progress';
-import { CircleX, X } from 'lucide-react';
-import Question from '@/components/Question';
+// import { CircleX, X } from 'lucide-react';
+import { X } from 'lucide-react';
+// import Question from '@/components/Question';
 import { Button } from "@/components/ui/button"
 import { useNavigate, useParams } from 'react-router';
 
