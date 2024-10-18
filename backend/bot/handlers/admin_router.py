@@ -1,7 +1,7 @@
 from aiogram import Router, F
 from aiogram.types import Message, CallbackQuery
-from backend.bot.keyboards.kbs import main_keyboard, admin_keyboard
-from backend.config import settings
+from ..keyboards.kbs import main_keyboard, admin_keyboard
+from ...config import settings
 
 admin_router = Router()
 

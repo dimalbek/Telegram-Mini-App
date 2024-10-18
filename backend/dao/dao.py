@@ -1,9 +1,9 @@
 from sqlalchemy.future import select
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import joinedload
-from backend.dao.base import BaseDAO
-from backend.database.models import User, Service, Application, Master
-from backend.database.database import async_session_maker
+from ..dao.base import BaseDAO
+from ..database.models import User, Service, Application, Master
+from ..database.database import async_session_maker
 
 
 class UserDAO(BaseDAO):

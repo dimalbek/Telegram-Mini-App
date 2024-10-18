@@ -1,7 +1,7 @@
 from aiogram.types import ReplyKeyboardMarkup, WebAppInfo, InlineKeyboardMarkup
 from aiogram.utils.keyboard import ReplyKeyboardBuilder, InlineKeyboardBuilder
 
-from backend.config import settings
+from ...config import settings
 
 
 def main_keyboard(user_id: int, first_name: str) -> ReplyKeyboardMarkup:
