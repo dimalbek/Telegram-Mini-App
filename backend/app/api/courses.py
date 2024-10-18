@@ -15,7 +15,7 @@ router = APIRouter()
 courses_repository = CoursesRepository()
 
 
-# Get all courses belonging to the user
+# Get all courses
 @router.get("/", response_model=Courses)
 def get_courses(
     db: Session = Depends(get_db),
@@ -25,10 +25,7 @@ def get_courses(
     total_count, courses = courses_repository.get_courses(db, limit, offset)
     if not courses:
         raise HTTPException(status_code=404, detail="No courses found")
-    return Courses(
-        total=total_count,
-        objects=courses
-    )
+    return Courses(total=total_count, objects=courses)
 
 
 # Get a specific course belonging to the user
