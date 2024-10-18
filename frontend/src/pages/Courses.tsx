@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import CourseElement from '../components/course/CourseElement';
 import { TypographyH3 } from '@/components/ui/typography';
 import { Plus } from 'lucide-react';
@@ -11,25 +11,27 @@ import {
     DrawerContent,
     DrawerTrigger,
   } from "@/components/ui/drawer"
-  
-
-const COURSESDATA = [
-    {
-        id: 1,
-        description: "lorem ipsum dolor sit amet consectetur adipiscing elit",
-        title: "Next.js 14 & React - The Complete Guide"
-    },
-    {   
-        id: 2,
-        description: "Next.js",
-        title: "Hello.js 14 & React - The Complete Guide"
-    }
-]
+import { TCourse } from '@/lib/types';
 
 const Courses = () => {
     // @ts-ignore
-    const [data, setData] = useState(COURSESDATA);
+    const [data, setData] = useState([]);
     const [query, setQuery] = useState('');
+
+    useEffect(() => {
+        fetch('https://telegram-mini-app-x496.onrender.com/courses/', 
+        {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+        )
+        .then(response => response.json())
+        .then(data => {
+            setData(data.objects)
+        })
+    }, [])
 
 
     return (
@@ -48,7 +50,7 @@ const Courses = () => {
                 
             </div>
             
-            {data && data.filter((course) => course.title.toLowerCase().includes(query.toLowerCase())).map(courseData=>{
+            {data && data.filter((course: TCourse) => course.title.toLowerCase().includes(query.toLowerCase())).map(courseData=>{
                 return <CourseElement course={courseData}/>
             })}
         </div>
