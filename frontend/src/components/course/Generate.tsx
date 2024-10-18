@@ -30,7 +30,9 @@ export const Generate = () => {
       })
 
       const handleSubmit = (data: z.infer<typeof formSchema>) => {
-        console.log(data)
+        fetch(`https://telegram-mini-app-x496.onrender.com/courses/generate?learning_field=${data.fieldName}&description=${data.description}&user_id=${444368298}`, {
+            method: 'POST',
+        })
       }
     
     return (
