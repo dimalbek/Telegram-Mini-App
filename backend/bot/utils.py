@@ -1,5 +1,5 @@
 from aiogram.types import Message
-from backend.bot.keyboards.kbs import main_keyboard
+from .keyboards.kbs import main_keyboard
 
 
 def get_about_us_text() -> str:

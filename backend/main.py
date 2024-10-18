@@ -1,8 +1,8 @@
 import logging
 from contextlib import asynccontextmanager
-from backend.bot.create_bot import bot, dp, stop_bot, start_bot
-from backend.bot.handlers.user_router import user_router
-from backend.config import settings
+from .bot.create_bot import bot, dp, stop_bot, start_bot
+from .bot.handlers.user_router import user_router
+from .config import settings
 from aiogram.types import Update
 from fastapi import FastAPI, Request
 
