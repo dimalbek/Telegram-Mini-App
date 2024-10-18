@@ -8,14 +8,13 @@ class UserCreate(BaseModel):
     tokens_balance: Optional[int] = 0
     experience_points: Optional[int] = 0
     level: Optional[int] = 1
+    username: str
 
     class Config:
         schema_extra = {
             "example": {
                 "user_id": 123456789,
-                "tokens_balance": 10,
-                "experience_points": 200,
-                "level": 2,
+                "username": "john_doe",
             }
         }
 
