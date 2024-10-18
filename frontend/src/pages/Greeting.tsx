@@ -13,7 +13,6 @@ export const Greeting = () => {
         if (window.Telegram?.WebApp) {
         // Retrieve user data
         const userData = window.Telegram.WebApp.initDataUnsafe.user;
-        console.log(userData);
         setUser(userData);
         }
     }, []);
@@ -28,7 +27,7 @@ export const Greeting = () => {
             duration: 5,
           }}
         >
-          <TypographyH3>Welcome, {user.first_name}!</TypographyH3>
+          <TypographyH3>Welcome, {window.Telegram.WebApp.toString()}!</TypographyH3>
         </motion.span>
         </main>
     )
