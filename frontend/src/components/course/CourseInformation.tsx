@@ -1,4 +1,4 @@
-import React from 'react'
+
 //@ts-ignore
 const CourseInformation = ({title, instructor, description, rating, numReviews, duration, imageUrl,lessons, ...other}) => {
     return (

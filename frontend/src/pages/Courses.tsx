@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import CourseElement from '../components/course/CourseElement';
 import { useNavigate } from 'react-router';
 
@@ -18,7 +18,7 @@ const COURSESDATA = [
 ]
 
 const Courses = () => {
-
+    // @ts-ignore
     const [data, setData] = useState(COURSESDATA);
 
     const navigate = useNavigate();

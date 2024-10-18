@@ -1,4 +1,4 @@
-import React, {createContext, useState, useMemo} from 'react';
+import {createContext, useState, useMemo} from 'react';
 
 const GlobalContext = createContext<GlobalContextProps | undefined>(undefined);
 
@@ -35,6 +35,7 @@ export interface GlobalContextProps extends GlobalState {
 
 export const GlobalProvider = ({ children }: {children: any}) => {
     const [user, setUser] = useState<User | null>(null);
+    // @ts-ignore
     const [courses, setCourses] = useState<Course[]>([]);
   
     const login = (userData: any) => {
@@ -44,7 +45,7 @@ export const GlobalProvider = ({ children }: {children: any}) => {
     const logout = () => {
       setUser(null);
     };
-
+// @ts-ignore
     const contextValue = useMemo(
       () => ({
         user,

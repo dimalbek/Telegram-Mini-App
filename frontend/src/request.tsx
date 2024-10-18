@@ -1,3 +1,4 @@
+// @ts-ignore
 const DEFAULT_URL = "";
 //@ts-ignore
 const TG = window.Telegram.WebApp;

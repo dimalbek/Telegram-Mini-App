@@ -1,9 +1,10 @@
-import React from 'react';
+
 import { useParams } from 'react-router';
 
 const Lesson = () => {
 
     const params = useParams();
+    // @ts-ignore
     const {courseId, moduleId, lessonId} = params;
 
     const lesson = {

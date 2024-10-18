@@ -1,15 +1,18 @@
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import MainLayout from './layouts/MainLayout';
 import Courses from './pages/Courses';
 import Course from './pages/Course';
 import Lesson from './pages/Lesson';
+import { Greeting } from './pages/Greeting';
 
 const router = createBrowserRouter([
   {
-    path: "",
-    element: <MainLayout />,  
+    path: "", 
     children: [
+      {
+        path: '/',
+        element: <Greeting />,
+      },
       {
         path: "courses", 
         children: [

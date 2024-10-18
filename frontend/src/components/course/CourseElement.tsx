@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { Star, StarHalf } from 'lucide-react';
 
 const CourseElement = ({image, description, name, onClick}: {image: string, description: string, name: string, onClick: ()=>void}) => {
