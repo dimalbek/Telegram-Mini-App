@@ -64,17 +64,13 @@ export const Greeting = () => {
           first_name: 'Developer',
           last_name: 'User',
         });
-        setBackgroundColor('#FFFFFF');
-        setTextColor('#000000');
       }
     }, []);
 
 
-  
     return (
       <main
         className="w-full flex flex-col items-start h-screen border justify-center gap-8 p-2"
-        style={{ backgroundColor: backgroundColor, color: textColor }}
       >
         <motion.span
           initial={{ opacity: 0 }}

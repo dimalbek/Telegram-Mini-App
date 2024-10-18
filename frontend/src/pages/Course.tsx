@@ -2,19 +2,17 @@
 import { useParams } from 'react-router-dom';
 import { COURSESDATA } from '../assets/courses';
 import CourseInformation from '../components/course/CourseInformation';
-import CourseModules from '../components/course/CourseModules';
+import { TCourse } from '../lib/types';
 
 const Course = () => {
     const params = useParams();
 
     const {courseId} = params;
-    const courseData = COURSESDATA.find(courseData=>courseData.id.toString()===courseId);
+    const courseData: TCourse | undefined = COURSESDATA.find(course => course.id === Number(courseId));
 
     return (   
         <>
-            {/* @ts-ignore */}
-            <CourseInformation {...courseData}/>
-            <CourseModules/>
+            <CourseInformation course={courseData}/>
         </>
     )
 }
