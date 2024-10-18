@@ -1,6 +1,20 @@
-import React from 'react';
 import { useParams } from 'react-router';
 import { Separator } from "@/components/ui/separator";
+import {
+    Breadcrumb,
+    BreadcrumbEllipsis,
+    BreadcrumbItem,
+    BreadcrumbLink,
+    BreadcrumbList,
+    BreadcrumbPage,
+    BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb"
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 
 const lesson = {
   "id": 1,
@@ -33,24 +47,6 @@ const lesson = {
     }
   ]
 }
-
-import { ChevronDown, Slash } from "lucide-react"
-
-import {
-    Breadcrumb,
-    BreadcrumbEllipsis,
-    BreadcrumbItem,
-    BreadcrumbLink,
-    BreadcrumbList,
-    BreadcrumbPage,
-    BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb"
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
 
 export function BreadcrumbDemo() {
     return (
@@ -92,7 +88,8 @@ export function BreadcrumbDemo() {
 const Lesson = () => {
 
     const params = useParams();
-    //const {courseId, moduleId, lessonId} = params;
+    // @ts-ignore
+    const {courseId, moduleId, lessonId} = params;
 
     const content = lesson.content;
 
