@@ -1,7 +1,7 @@
 
 
 export type TCourse = {
-    id: number;
+    course_id: number;
     title: string;
     description: string;
     createdAt?: string;

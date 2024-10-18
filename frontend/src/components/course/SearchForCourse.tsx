@@ -20,7 +20,7 @@ export const SearchForCourse = () => {
         )
         .then(response => response.json())
         .then(data => {
-            setCourses(data)
+            setCourses(data.objects)
         })
     }, [])
 
