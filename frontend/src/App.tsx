@@ -10,13 +10,10 @@ import MainLayout from './layouts/MainLayout';
 const router = createBrowserRouter([
   {
     path: "", 
+    element: <MainLayout/>,
     children: [
       {
-        path: "",
-        element: <MainLayout/>
-      },
-      {
-        path: '/greeting',
+        path: '',
         element: <Greeting />,
       },
       {
