@@ -1,25 +1,35 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { TypographyH3 } from '@/components/ui/typography';
 import { motion } from 'framer-motion';
 import { TelegramUser } from '@/global';
 import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router';
+import { GlobalContext } from '@/context/GlobalContext';
+import { fetchUserData } from '@/api/api';
 
 export const Greeting = () => {
-    const [user, setUser] = useState<TelegramUser | null>(null);
+    const globalCtx = useContext(GlobalContext);
+
+    const {user, courses, login, logout, setUser, fetchData, loading, error, userData} = globalCtx;
+
+    //const [user, setUser] = useState<TelegramUser | null>(null);
     const [backgroundColor, setBackgroundColor] = useState<string>('#FFFFFF');
     const [textColor, setTextColor] = useState<string>('#000000');
 
     const navigate = useNavigate();
-  
+
+    useEffect(()=>{
+      fetchData();
+    }, [fetchData]);
+
     useEffect(() => {
       if (window.Telegram?.WebApp) {
         const { WebApp } = window.Telegram;
-  
+        
         WebApp.ready();
-  
+
         const userData = WebApp.initDataUnsafe.user;
-        setUser(userData || null);
+
   
         const bgColor = WebApp.themeParams.backgroundColor || '#FFFFFF';
         const txtColor = WebApp.themeParams.textColor || '#000000';
@@ -73,7 +83,7 @@ export const Greeting = () => {
             duration: 5,
           }}
         >
-          {user ? (
+          {!loading ? (
             <TypographyH3>
               Welcome, {user.first_name} {user.last_name || ''}!
             </TypographyH3>
