@@ -2,7 +2,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Courses from './pages/Courses';
 import Course from './pages/Course';
 import Lesson from './pages/Lesson';
-import { Generate } from './pages/Generate';
+import { Generate } from './components/course/Generate';
 import {Greeting} from './pages/Greeting'
 import Quiz from './pages/Quiz';
 import MainLayout from './layouts/MainLayout';
