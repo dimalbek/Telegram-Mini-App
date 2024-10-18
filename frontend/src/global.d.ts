@@ -5,27 +5,33 @@ declare global {
     Telegram: Telegram;
   }
 }
-
-interface Telegram {
-  WebApp: TelegramWebApp;
-}
-
-interface TelegramWebApp {
-  initData: string;
-  initDataUnsafe: {
-    user?: TelegramUser;
-    // Add other properties if needed
-  };
-  // Add other properties and methods as needed
-  ready: () => void;
-  // ...
-}
-
-interface TelegramUser {
-  id: number;
-  first_name: string;
-  last_name?: string;
-  username?: string;
-  language_code?: string;
-  // Add other user properties if needed
-}
+export interface TelegramUser {
+    id: number;
+    first_name: string;
+    last_name?: string;
+    username?: string;
+    language_code?: string;
+  }
+  
+  export interface ThemeParams {
+    backgroundColor?: string;
+    textColor?: string;
+    hintColor?: string;
+    linkColor?: string;
+    buttonColor?: string;
+    buttonTextColor?: string;
+    secondaryBackgroundColor?: string;
+  }
+  
+  export interface TelegramWebApp {
+    initData: string;
+    initDataUnsafe: {
+      user?: TelegramUser;
+    };
+    themeParams: ThemeParams;
+    onEvent: (eventType: string, callback: () => void) => void;
+    offEvent: (eventType: string, callback: () => void) => void;
+    ready: () => void;
+    // Other methods and properties as needed
+  }
+  
