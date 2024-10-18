@@ -10,7 +10,15 @@ export const SearchForCourse = () => {
     const [courses, setCourses] = useState<TCourse[]>([])
 
     useEffect(() => {
-        fetch('https://5939-178-91-253-84.ngrok-free.app/courses')
+        fetch('https://5939-178-91-253-84.ngrok-free.app/courses', 
+        {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                "ngrok-skip-browser-warning": "69420"
+            }
+        }
+        )
         .then(response => response.json())
         .then(data => {
             setCourses(data)
