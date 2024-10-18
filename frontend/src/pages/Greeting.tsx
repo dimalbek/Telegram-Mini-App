@@ -2,11 +2,15 @@ import { useEffect, useState } from 'react';
 import { TypographyH3 } from '@/components/ui/typography';
 import { motion } from 'framer-motion';
 import { TelegramUser } from '@/global';
+import { Button } from '@/components/ui/button';
+import { useNavigate } from 'react-router';
 
 export const Greeting = () => {
     const [user, setUser] = useState<TelegramUser | null>(null);
     const [backgroundColor, setBackgroundColor] = useState<string>('#FFFFFF');
     const [textColor, setTextColor] = useState<string>('#000000');
+
+    const navigate = useNavigate();
   
     useEffect(() => {
       if (window.Telegram?.WebApp) {
@@ -54,10 +58,12 @@ export const Greeting = () => {
         setTextColor('#000000');
       }
     }, []);
+
+
   
     return (
       <main
-        className="w-full flex flex-col items-center h-screen justify-center gap-4 p-2"
+        className="w-full flex flex-col items-start h-screen border justify-center gap-8 p-2"
         style={{ backgroundColor: backgroundColor, color: textColor }}
       >
         <motion.span
@@ -75,6 +81,18 @@ export const Greeting = () => {
             <TypographyH3>Loading user data...</TypographyH3>
           )}
         </motion.span>
+
+        <motion.div
+        className='w-full'
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{
+            duration: 5,
+          }}
+        >
+          <Button size="lg" onClick={() => navigate('/courses')} className='w-full'>Let's start!</Button>
+        </motion.div>
+
       </main>
     );
   
