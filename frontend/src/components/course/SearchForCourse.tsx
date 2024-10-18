@@ -10,7 +10,7 @@ export const SearchForCourse = () => {
     const [courses, setCourses] = useState<TCourse[]>([])
 
     useEffect(() => {
-        fetch('https://5939-178-91-253-84.ngrok-free.app/courses', 
+        fetch('https://telegram-mini-app-x496.onrender.com/courses', 
         {
             method: 'GET',
             headers: {
