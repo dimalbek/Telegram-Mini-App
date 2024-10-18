@@ -42,7 +42,7 @@ export const Greeting = () => {
                         name="fieldName"
                         render={({ field }) => (
                             <FormItem>
-                            <FormLabel htmlFor="fieldName">What you want to learn</FormLabel>
+                            <FormLabel htmlFor="fieldName">What do you want to learn?</FormLabel>
                             <FormControl>
                                 <Input {...field} />
                             </FormControl>
@@ -54,7 +54,7 @@ export const Greeting = () => {
                         name="description"
                         render={({ field }) => (
                             <FormItem>
-                            <FormLabel htmlFor="fieldName">Please tell me </FormLabel>
+                            <FormLabel htmlFor="fieldName">Please tell me about yourself</FormLabel>
                             <FormControl>
                                 <Textarea {...field} />
                             </FormControl>
