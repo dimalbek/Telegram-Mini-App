@@ -4,7 +4,7 @@ function App() {
 
   return (
     <main className="">
-      Oqu
+      
     </main>
   )
 }
