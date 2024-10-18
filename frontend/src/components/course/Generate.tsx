@@ -12,6 +12,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { TypographyH3 } from "../ui/typography"
  
 const formSchema = z.object({
     fieldName: z.string(),
@@ -33,8 +34,8 @@ export const Generate = () => {
       }
     
     return (
-        <main className="w-full flex flex-col items-center h-screen justify-center gap-4 p-2">
-            <h1 className="text-4xl px-4 font-bold w-full">Generate your course!</h1>
+        <div className="w-full flex flex-col items-center gap-4">
+            <TypographyH3 className='text-[24px]'>Generate your own course!</TypographyH3>
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-8 w-full px-4">
                     <FormField
@@ -64,6 +65,6 @@ export const Generate = () => {
                     <Button type="submit" className="w-full">Submit</Button>
                 </form>
             </Form>
-        </main>
+        </div>
     )
 }
