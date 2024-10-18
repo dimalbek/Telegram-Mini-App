@@ -1,5 +1,4 @@
-import { useState, useEffect } from 'react';
-import { getUserData } from './request';
+
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import MainLayout from './layouts/MainLayout';
 import Courses from './pages/Courses';
