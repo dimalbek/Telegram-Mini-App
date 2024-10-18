@@ -1,10 +1,12 @@
 import {createContext, useState, useMemo} from 'react';
 
-export const GlobalContext = createContext({});
+export const GlobalContext = createContext({} as GlobalContextProps);
 
 export interface User {
     id: number;
     name: string;
+    first_name: string, 
+    last_name: string
 }
   
 export interface Course {
@@ -20,21 +22,19 @@ export interface GlobalState {
 
 export interface GlobalContextProps extends GlobalState {
     courses: Course[];
-    login: (userData: User) => void;
-    logout: () => void;
     enrollCourse?: (course: Course) => void;
     unenrollCourse?: (courseId: number) => void;
-    setUser: any
+    setUser: any,
+    fetchData: () => {},
+    loading: boolean,
+    error: any,
+    userData: any
 }
 
 import { fetchUserData } from '@/api/api';
 
 export const GlobalProvider = ({ children }: {children: any}) => {
-    const [user, setUser] = useState({
-      id: 1341234,
-      first_name: "Alikhan",
-      last_name: "Nashtay"
-    });
+    const [user, setUser] = useState<User>({} as User);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [userData, setUserData] = useState();
