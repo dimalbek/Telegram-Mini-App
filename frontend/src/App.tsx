@@ -4,12 +4,16 @@ import MainLayout from './layouts/MainLayout';
 import Courses from './pages/Courses';
 import Course from './pages/Course';
 import Lesson from './pages/Lesson';
+import Quiz from './pages/Quiz';
 
 const router = createBrowserRouter([
   {
     path: "",
-    element: <MainLayout />,  
     children: [
+      {
+        path: "",
+        element: <MainLayout/>
+      },
       {
         path: "courses", 
         children: [
@@ -24,6 +28,10 @@ const router = createBrowserRouter([
           {
             path: ":courseId/modules/:moduleId/lessons/:lessonId",
             element: <Lesson/>
+          },
+          {
+            path: ":courseId/modules/:moduleId/lessons/:lessonId/quiz",
+            element: <Quiz/>
           }
         ],
       },

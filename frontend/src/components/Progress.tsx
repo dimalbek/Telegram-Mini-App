@@ -1,9 +1,11 @@
 import React from 'react'
+import { Progress } from "@/components/ui/progress"
 
-const Progress = () => {
+const ProgressBar = ({value}: {value: number}) => {
+  console.log(value);
   return (
-    <div>Progress</div>
+    <Progress value={value} className='w-[85%] h-4'/>
   )
 }
 
-export default Progress
+export default ProgressBar
