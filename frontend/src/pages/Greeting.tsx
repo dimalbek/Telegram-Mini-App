@@ -1,20 +1,20 @@
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useContext } from 'react';
 import { TypographyH3 } from '@/components/ui/typography';
 import { motion } from 'framer-motion';
-import { TelegramUser } from '@/global';
+//import { TelegramUser } from '@/global';
 import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router';
 import { GlobalContext } from '@/context/GlobalContext';
-import { fetchUserData } from '@/api/api';
+//import { fetchUserData } from '@/api/api';
 
 export const Greeting = () => {
     const globalCtx = useContext(GlobalContext);
 
-    const {user, courses, login, logout, setUser, fetchData, loading, error, userData} = globalCtx;
+    const {user, setUser, fetchData, loading, error} = globalCtx;
 
     //const [user, setUser] = useState<TelegramUser | null>(null);
-    const [backgroundColor, setBackgroundColor] = useState<string>('#FFFFFF');
-    const [textColor, setTextColor] = useState<string>('#000000');
+    //const [backgroundColor, setBackgroundColor] = useState<string>('#FFFFFF');
+    //const [textColor, setTextColor] = useState<string>('#000000');
 
     const navigate = useNavigate();
 
@@ -29,13 +29,14 @@ export const Greeting = () => {
         WebApp.ready();
 
         const userData = WebApp.initDataUnsafe.user;
+        setUser(userData.id);
 
   
         const bgColor = WebApp.themeParams.backgroundColor || '#FFFFFF';
         const txtColor = WebApp.themeParams.textColor || '#000000';
   
-        setBackgroundColor(bgColor);
-        setTextColor(txtColor);
+        // setBackgroundColor(bgColor);
+        // setTextColor(txtColor);
   
         // Apply CSS variables
         document.documentElement.style.setProperty('--tg-background-color', bgColor);
@@ -45,8 +46,8 @@ export const Greeting = () => {
           const newBgColor = WebApp.themeParams.backgroundColor || '#FFFFFF';
           const newTxtColor = WebApp.themeParams.textColor || '#000000';
   
-          setBackgroundColor(newBgColor);
-          setTextColor(newTxtColor);
+          // setBackgroundColor(newBgColor);
+          // setTextColor(newTxtColor);
   
           document.documentElement.style.setProperty('--tg-background-color', newBgColor);
           document.documentElement.style.setProperty('--tg-text-color', newTxtColor);
@@ -78,10 +79,10 @@ export const Greeting = () => {
           transition={{
             duration: 5,
           }}
-        >
+        > {error && <TypographyH3>{error}!</TypographyH3>}
           {!loading ? (
             <TypographyH3>
-              Welcome, {user.first_name} {user.last_name || ''}!
+              Welcome, {user && user.first_name} {user && user.last_name || ''}!
             </TypographyH3>
           ) : (
             <TypographyH3>Loading user data...</TypographyH3>
