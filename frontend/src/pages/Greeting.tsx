@@ -87,7 +87,7 @@ export const Greeting = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{
-            duration: 5,
+            duration: 2,
           }}
         >
           <Button size="lg" onClick={() => navigate('/courses')} className='w-full'>Let's start!</Button>
