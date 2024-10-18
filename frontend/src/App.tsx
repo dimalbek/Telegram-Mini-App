@@ -3,7 +3,8 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Courses from './pages/Courses';
 import Course from './pages/Course';
 import Lesson from './pages/Lesson';
-import { Greeting } from './pages/Greeting';
+import { Generate } from './pages/Generate';
+import {Greeting} from './pages/Greeting'
 
 const router = createBrowserRouter([
   {
@@ -12,6 +13,10 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <Greeting />,
+      },
+      {
+        path: '/generate',
+        element: <Generate />,
       },
       {
         path: "courses", 

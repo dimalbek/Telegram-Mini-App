@@ -1,69 +1,35 @@
+import { TypographyH3 } from "@/components/ui/typography"
+// @ts-ignore
+const TG = window.Telegram.WebApp;
+import { motion } from "framer-motion"
+import { useEffect, useState } from "react";
 
-import { Textarea } from "@/components/ui/textarea"
-import { z } from "zod"
-import { Button } from "@/components/ui/button"
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
- 
-const formSchema = z.object({
-    fieldName: z.string(),
-    description: z.string(),
-})
 
 export const Greeting = () => {
 
-    const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
-        defaultValues: {
-            fieldName: "",
-            description: "",
-        },
-      })
+    const [user, setUser] = useState<any>();
 
-      const handleSubmit = (data: z.infer<typeof formSchema>) => {
-        console.log(data)
-      }
+    useEffect(() => {
+        if (window.Telegram?.WebApp) {
+        // Retrieve user data
+        const userData = window.Telegram.WebApp.initDataUnsafe.user;
+        console.log(userData);
+        setUser(userData);
+        }
+    }, []);
+
     
     return (
         <main className="w-full flex flex-col items-center h-screen justify-center gap-4 p-2">
-            <h1 className="text-4xl px-4 font-bold w-full">Welcome!</h1>
-            <Form {...form}>
-                <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-8 w-full px-4">
-                    <FormField
-                        control={form.control}
-                        name="fieldName"
-                        render={({ field }) => (
-                            <FormItem>
-                            <FormLabel htmlFor="fieldName">What do you want to learn?</FormLabel>
-                            <FormControl>
-                                <Input {...field} />
-                            </FormControl>
-                            </FormItem>
-                        )}
-                    />
-                    <FormField
-                        control={form.control}
-                        name="description"
-                        render={({ field }) => (
-                            <FormItem>
-                            <FormLabel htmlFor="fieldName">Please tell me about yourself</FormLabel>
-                            <FormControl>
-                                <Textarea {...field} />
-                            </FormControl>
-                            </FormItem>
-                        )}
-                    />
-                    <Button type="submit" className="w-full">Submit</Button>
-                </form>
-            </Form>
+            <motion.span
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{
+            duration: 5,
+          }}
+        >
+          <TypographyH3>Welcome, {user.first_name}!</TypographyH3>
+        </motion.span>
         </main>
     )
 }
