@@ -30,7 +30,6 @@ export const Greeting = () => {
     }, []);
 
 
-  
     return (
       <main
         className="w-full flex flex-col items-start h-screen border justify-center gap-8 p-2"

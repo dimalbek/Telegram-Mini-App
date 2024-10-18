@@ -1,17 +1,19 @@
-
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Courses from './pages/Courses';
 import Course from './pages/Course';
 import Lesson from './pages/Lesson';
 import { Generate } from './components/course/Generate';
 import {Greeting} from './pages/Greeting'
+import Quiz from './pages/Quiz';
+import MainLayout from './layouts/MainLayout';
 
 const router = createBrowserRouter([
   {
     path: "", 
+    element: <MainLayout/>,
     children: [
       {
-        path: '/',
+        path: '',
         element: <Greeting />,
       },
       {
@@ -32,6 +34,10 @@ const router = createBrowserRouter([
           {
             path: ":courseId/modules/:moduleId/lessons/:lessonId",
             element: <Lesson/>
+          },
+          {
+            path: ":courseId/modules/:moduleId/lessons/:lessonId/quiz",
+            element: <Quiz/>
           }
         ],
       },
