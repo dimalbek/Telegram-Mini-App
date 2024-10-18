@@ -7,7 +7,7 @@ import CourseElement from "./CourseElement"
 export const SearchForCourse = () => {
 
     const [search, setSearch] = useState<string>('')
-    const [courses, setCourses] = useState<TCourse[]>([])
+    const [courses] = useState<TCourse[]>([])
 
     return (
         <div className="w-full flex flex-col items-center gap-4">
