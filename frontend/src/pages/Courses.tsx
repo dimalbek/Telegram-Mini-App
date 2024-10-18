@@ -1,9 +1,22 @@
 import { useState } from 'react';
 import CourseElement from '../components/course/CourseElement';
 import { TypographyH3 } from '@/components/ui/typography';
-import { WandSparkles } from 'lucide-react';
+import { Plus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { CreateCourse } from '@/components/course/CreateCourse';
+
+import {
+    Drawer,
+    DrawerClose,
+    DrawerContent,
+    DrawerDescription,
+    DrawerFooter,
+    DrawerHeader,
+    DrawerTitle,
+    DrawerTrigger,
+  } from "@/components/ui/drawer"
+  
 
 const COURSESDATA = [
     {
@@ -29,9 +42,15 @@ const Courses = () => {
             <Input type="text" placeholder="Search.." value={query} onChange={(e) => setQuery(e.target.value)} />
             <div className='w-full flex items-center justify-between '>
                 <TypographyH3 className='text-[24px]'>My courses</TypographyH3>
-                <Button size="default" variant="ghost">
-                    <WandSparkles size={24} />
-                </Button>
+                <Drawer>
+                    <DrawerTrigger>
+                        <Button size="default" variant="ghost">
+                            <Plus size={24} />
+                        </Button>
+                    </DrawerTrigger>
+                    <DrawerContent><CreateCourse /></DrawerContent>
+                </Drawer>
+                
             </div>
             
             {data && data.filter((course) => course.title.toLowerCase().includes(query.toLowerCase())).map(courseData=>{
