@@ -10,12 +10,11 @@ export const SearchForCourse = () => {
     const [courses, setCourses] = useState<TCourse[]>([])
 
     useEffect(() => {
-        fetch('https://telegram-mini-app-x496.onrender.com/courses', 
+        fetch('https://telegram-mini-app-x496.onrender.com/courses/', 
         {
             method: 'GET',
             headers: {
-                'Content-Type': 'application/json',
-                "ngrok-skip-browser-warning": "69420"
+                'Content-Type': 'application/json'
             }
         }
         )
