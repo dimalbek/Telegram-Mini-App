@@ -30,7 +30,9 @@ export const Generate = () => {
       })
 
       const handleSubmit = (data: z.infer<typeof formSchema>) => {
-        console.log(data)
+        fetch(`https://5939-178-91-253-84.ngrok-free.app/courses/generate?learning_field=${data.fieldName}&description=${data.description}&user_id=${444368298}`, {
+            method: 'POST',
+        })
       }
     
     return (
