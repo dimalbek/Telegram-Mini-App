@@ -31,7 +31,17 @@ export const GlobalProvider: React.FC<GlobalProviderProps> = ({ children }) => {
 
       const userData = WebApp.initDataUnsafe.user;
       if (userData) {
-        setUser(userData);
+        fetch(`https://telegram-mini-app-x496.onrender.com/users`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({user_id: userData.id}),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            setUser(data);
+          });
       } else {
         console.warn('User data is undefined.');
         setUser(null);
@@ -42,6 +52,7 @@ export const GlobalProvider: React.FC<GlobalProviderProps> = ({ children }) => {
         id: 0,
         first_name: 'Developer',
         last_name: 'User',
+        token_balance: 0,
       });
     }
     setIsLoading(false);
