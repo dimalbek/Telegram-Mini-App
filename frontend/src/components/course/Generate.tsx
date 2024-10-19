@@ -14,6 +14,9 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { TypographyH3 } from "../ui/typography"
 import { useGlobalContext } from "@/context/GlobalContext"
+import { useState } from "react"
+import { useNavigate } from "react-router"
+import { Loader } from "lucide-react"
  
 const formSchema = z.object({
     fieldName: z.string(),
@@ -23,6 +26,8 @@ const formSchema = z.object({
 export const Generate = () => {
 
     const { user } = useGlobalContext()
+    const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -34,8 +39,16 @@ export const Generate = () => {
 
       const handleSubmit = (data: z.infer<typeof formSchema>) => {
         if (user) {
+            setLoading(true)
             fetch(`https://telegram-mini-app-x496.onrender.com/courses/generate?learning_field=${data.fieldName}&description=${data.description}&user_id=${user.id}`, {
                 method: 'POST',
+            })
+            .then(response => response.json())
+            .then(() => {
+                setTimeout(() => {
+                    setLoading(false)
+                    navigate('/courses')
+                }, 3000)
             })
         }
         
@@ -70,7 +83,7 @@ export const Generate = () => {
                             </FormItem>
                         )}
                     />
-                    <Button type="submit" className="w-full">Submit</Button>
+                    <Button type="submit" disabled={loading} className="w-full">{loading ? <Loader className="animate-spin" /> : 'Submit'}</Button>
                 </form>
             </Form>
         </div>
