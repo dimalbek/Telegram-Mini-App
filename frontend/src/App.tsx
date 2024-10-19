@@ -6,6 +6,7 @@ import { Generate } from './components/course/Generate';
 import {Greeting} from './pages/Greeting'
 import Quiz from './pages/Quiz';
 import MainLayout from './layouts/MainLayout';
+import Profile from './pages/Profile';
 
 const router = createBrowserRouter([
   {
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
         path: "progress",  
         //element: <Progress />,
       },
+      {
+        path: "users/:userId/profile",
+        element: <Profile/>
+      }
     ],
   },
 ]);
