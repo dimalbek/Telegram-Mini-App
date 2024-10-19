@@ -22,7 +22,6 @@ interface GlobalProviderProps {
 export const GlobalProvider: React.FC<GlobalProviderProps> = ({ children }) => {
   const [user, setUser] = useState<TelegramUser | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [isTrue, setIsTrue] = useState<boolean>(true);
 
   useEffect(() => {
     if (window.Telegram?.WebApp) {
@@ -32,7 +31,6 @@ export const GlobalProvider: React.FC<GlobalProviderProps> = ({ children }) => {
 
       const userData = WebApp.initDataUnsafe.user;
       if (userData) {
-        setIsTrue(true)
         fetch(`https://telegram-mini-app-x496.onrender.com/users/`, {
           method: 'POST',
           headers: {
