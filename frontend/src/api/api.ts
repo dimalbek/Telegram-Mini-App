@@ -1,4 +1,3 @@
-
 export const BASE_URL = "https://telegram-mini-app-x496.onrender.com";
 
 export async function fetchUserData(userId: number){
