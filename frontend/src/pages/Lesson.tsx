@@ -36,7 +36,8 @@ interface LessonData {
   description: string,
   position: number,
   content: LessonContent[],
-  image_url: string
+  image_url: string,
+  have_passed: string
 }
 
 
@@ -149,9 +150,12 @@ const Lesson = () => {
                         }
                     )}
                 </div>
-                <button className="w-full bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600" onClick={()=>navigate("quiz")}>
-                    Go to Quiz
-                </button>
+                {!data.have_passed && <button className="w-full bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600" onClick={()=>navigate("quiz")}>
+                  Go to Quiz
+                </button>}
+                {data.have_passed && <button disabled className="w-full bg-red-200 text-white py-2 px-4 rounded-lg" onClick={()=>navigate("quiz")}>
+                  You already passed the quiz
+                </button>}
             </div>
 
         </div>}
