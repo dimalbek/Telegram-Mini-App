@@ -1,22 +1,5 @@
 import { useParams } from 'react-router';
 import { Separator } from "@/components/ui/separator";
-import AudioPlayer from '@/components/AudioPlayer';
-
-import {
-    Breadcrumb,
-    BreadcrumbEllipsis,
-    BreadcrumbItem,
-    BreadcrumbLink,
-    BreadcrumbList,
-    BreadcrumbPage,
-    BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb"
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
 
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
@@ -60,10 +43,10 @@ const Lesson = () => {
 
 
     useEffect(()=>{
-      if (courseId && moduleId && lessonId){
+      if (courseId && moduleId && lessonId && user){
         async function fetchLessonData(lessonId: string){
           setIsLoading(true);
-          const url = `${BASE_URL}/lessons/${lessonId}?user_id=${444368298}`;
+          const url = `${BASE_URL}/lessons/${lessonId}?user_id=${user?.id}`;
           const response = await fetch(url, {
               method: "GET",
               headers: {

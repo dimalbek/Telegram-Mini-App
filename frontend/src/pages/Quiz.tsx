@@ -41,7 +41,6 @@ export interface QuizResult {
 }
 
 import { BASE_URL } from '@/api/api';
-import { useContext } from 'react';
 import { useGlobalContext } from '@/context/GlobalContext';
 
 const Quiz = () => {
@@ -83,21 +82,17 @@ const Quiz = () => {
         });
         if (response.ok){
           console.log(response);
-        }else{
-          console.log(response)
-          const text = await response.text();
         }
         const data = await response.json();
         setQuizData(data);
-        console.log(data);
       };
       fetchQuizData();
   }, []);
 
   useEffect(()=>{
-    if (isQuizFinished && !submitted && quizData){
+    if (isQuizFinished && !submitted && user && quizData){
       const submitQuiz = async () => {
-        const url = `${BASE_URL}/lessons/${lessonId}/quiz/submit?user_id=${444368298}&correct_answers=${userAnswers.filter((ans) => ans.isCorrect).length}&total_questions=${quizData.questions.length}`;
+        const url = `${BASE_URL}/lessons/${lessonId}/quiz/submit?user_id=${user.id}&correct_answers=${userAnswers.filter((ans) => ans.isCorrect).length}&total_questions=${quizData.questions.length}`;
         const response = await fetch(url, {
             method: "POST",
             headers: {
@@ -107,8 +102,6 @@ const Quiz = () => {
         });
         if (response.ok){
           setSubmitted(true);
-        }else{
-          const text = await response.text();
         }
         navigate("/");
       };
@@ -199,7 +192,7 @@ const Quiz = () => {
         <div className="flex flex-col gap-4 justify-center items-center">
           {currentQuestion.question_type==="multiple_choice" && currentQuestion.options.map((option, index) => {
             const isSelected = currentAnswer === option;
-            const currentStyles = `p-6 rounded-md w-[250px] text-lg ${
+            const currentStyles = `p-6 rounded-md w-full text-lg ${
               isSelected ? 'bg-blue-500 text-white' : 'border border-gray-300'
             }`;
             return (
@@ -213,7 +206,7 @@ const Quiz = () => {
               </Button>
             );
           })}
-          {currentQuestion.question_type==="true_false" && booleanChoices.map((option, index) => {
+          {currentQuestion.question_type==="true_false" && booleanChoices.map((option) => {
             const isSelected = currentAnswer === option;
             const currentStyles = `p-6 rounded-md w-[250px] text-lg ${
               isSelected ? 'bg-blue-500 text-white' : 'border border-gray-300'

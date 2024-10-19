@@ -1,7 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import {useNavigate } from 'react-router-dom';
 import { BASE_URL } from '@/api/api';
-import { Button } from "@/components/ui/button"
 import { CirclePlay, CirclePause } from 'lucide-react';
 
 interface Audio {
@@ -134,14 +133,6 @@ const AudioPlayer = ({lessonId}: {lessonId: string}) => {
         const newTime = (clickX / width) * duration;
         if (audioRef.current) {
             audioRef.current.currentTime = newTime;
-        }
-    };
-
-    // Handle volume change
-    const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const newVolume = parseFloat(e.target.value);
-        if (audioRef.current) {
-            audioRef.current.volume = newVolume;
         }
     };
 
