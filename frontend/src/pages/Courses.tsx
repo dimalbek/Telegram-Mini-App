@@ -12,8 +12,6 @@ import {
     DrawerTrigger,
   } from "@/components/ui/drawer"
 import { TCourse } from '@/lib/types';
-import { useContext } from 'react';
-import { UserContext } from '@/context/GlobalContext';
 
 import { useGlobalContext } from '@/context/GlobalContext';
 const Courses = () => {
@@ -26,7 +24,7 @@ const Courses = () => {
     const [courses, setCourses] = useState();
 
     console.log(courses);
-    
+
     useEffect(() => {
         if (user  && user.id){
             fetch(`https://telegram-mini-app-x496.onrender.com/users/enrolled-courses?user_id=${user.id}`, 

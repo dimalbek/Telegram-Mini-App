@@ -15,7 +15,7 @@ export async function fetchUserData(userId: number){
     return data;
 }
 
-export async function fetchUserCourses(userId){
-    return 1
-}
+// export async function fetchUserCourses(userId: any){
+//     return 1
+// }
 
