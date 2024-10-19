@@ -15,7 +15,7 @@ import { TCourse } from '@/lib/types';
 
 import { useGlobalContext } from '@/context/GlobalContext';
 const Courses = () => {
-    
+
     // @ts-ignore
     const [data, setData] = useState([]);
     const [query, setQuery] = useState('');
@@ -47,7 +47,7 @@ const Courses = () => {
             <Input type="text" placeholder="Search.." value={query} onChange={(e) => setQuery(e.target.value)} />
             <div className='w-full flex items-center justify-between '>
                 <TypographyH3 className='text-[24px]'>My courses</TypographyH3>
-                <Drawer>
+                <Drawer >
                     <DrawerTrigger>
                         <Button size="default" variant="ghost">
                             <Plus size={24} />
