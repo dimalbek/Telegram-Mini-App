@@ -77,8 +77,8 @@ export function Component() {
     </div>
   )
 }
-
-function CalendarIcon(props) {
+// @ts-ignore
+function CalendarIcon(props: any) {
   return (
     <svg
       {...props}
@@ -100,8 +100,8 @@ function CalendarIcon(props) {
   )
 }
 
-
-function MessageCircleIcon(props) {
+// @ts-ignore
+function MessageCircleIcon(props: any) {
   return (
     <svg
       {...props}

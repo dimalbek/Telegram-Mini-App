@@ -16,6 +16,15 @@ export const Greeting = () => {
       <main
         className="w-full flex flex-col items-start h-screen border justify-center gap-8 p-2"
       >
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{
+            duration: 5,
+          }}
+        >
+          <img src="/RobotWaveHand-ezgif.com-video-to-gif-converter (1).gif" className='h-[250px]' />
+        </motion.div>
         <motion.span
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}

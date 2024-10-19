@@ -17,80 +17,16 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 
 // import { BASE_URL } from '@/api/api';
 
-// const lesson = {
-//   "id": 1,
-//   "title": "Understanding HTML & CSS",
-//   "description": "Learn the basics of HTML & CSS to build the foundation for modern web development.",
-//   "imageUrl": 'https://miro.medium.com/v2/resize:fit:792/1*lJ32Bl-lHWmNMUSiSq17gQ.png',
-//   "content": [
-//     {
-//       "type": "text",
-//       "value": "HTML stands for HyperText Markup Language. It is the standard markup language for creating web pages."
-//     },
-//     {
-//       "type": "image",
-//       "value": "https://code.visualstudio.com/assets/docs/languages/css/color.png",
-//       "caption": "Example of an CSS structure"
-//     },
-//     {
-//       "type": "text",
-//       "value": "CSS stands for Cascading Style Sheets. It is used to style the layout of web pages."
-//     },
-//     {
-//       "type": "code",
-//       "language": "html",
-//       "value": "<!DOCTYPE html>\n<html>\n<head>\n  <title>My First HTML</title>\n</head>\n<body>\n  <h1>Hello World</h1>\n  <p>This is a paragraph.</p>\n</body>\n</html>"
-//     },
-//     {
-//       "type": "video",
-//       "value": "https://your-video-url.com/intro-html-css.mp4",
-//       "caption": "Introduction to HTML & CSS"
-//     }
-//   ]
-// }
-
-// export function BreadcrumbDemo() {
-//     return (
-//       <Breadcrumb>
-//         <BreadcrumbList className='flex flex-nowrap text-xs'>
-//           <BreadcrumbItem>
-//             <BreadcrumbLink href="/">Home</BreadcrumbLink>
-//           </BreadcrumbItem>
-//           <BreadcrumbSeparator />
-//           <BreadcrumbItem>
-//             <BreadcrumbLink href="/courses">Courses</BreadcrumbLink>
-//           </BreadcrumbItem>
-//           <BreadcrumbSeparator />
-//           <BreadcrumbItem>
-//             <DropdownMenu>
-//               <DropdownMenuTrigger className="flex items-center gap-1">
-//                 <BreadcrumbEllipsis className="h-4 w-4" />
-//                 <span className="sr-only">Toggle menu</span>
-//               </DropdownMenuTrigger>
-//               <DropdownMenuContent align="start">
-//                 <DropdownMenuItem>Documentation</DropdownMenuItem>
-//                 <DropdownMenuItem>Themes</DropdownMenuItem>
-//                 <DropdownMenuItem>GitHub</DropdownMenuItem>
-//               </DropdownMenuContent>
-//             </DropdownMenu>
-//           </BreadcrumbItem>
-//           <BreadcrumbSeparator />
-//           <BreadcrumbItem>
-//             <BreadcrumbPage>{lesson.title}</BreadcrumbPage>
-//           </BreadcrumbItem>
-//         </BreadcrumbList>
-//       </Breadcrumb>
-//     )
-// }
-
 interface LessonContent {
   type: string,
   value: string
+  caption: string
 }
 
 interface LessonData {
@@ -113,7 +49,9 @@ const Lesson = () => {
     const params = useParams();
     // @ts-ignore
     const {courseId, moduleId, lessonId} = params;
+    // @ts-ignore
     const [isLoading, setIsLoading] = useState(false);
+    // @ts-ignore
     const [error, setError] = useState('');
     const [data, setData] = useState({} as LessonData);
 
