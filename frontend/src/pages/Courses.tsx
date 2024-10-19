@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import CourseElement from '../components/course/CourseElement';
 import { TypographyH3 } from '@/components/ui/typography';
 import { Plus } from 'lucide-react';
@@ -13,30 +13,33 @@ import {
   } from "@/components/ui/drawer"
 import { TCourse } from '@/lib/types';
 
+import { useGlobalContext } from '@/context/GlobalContext';
 const Courses = () => {
 
     // @ts-ignore
     const [data, setData] = useState([]);
     const [query, setQuery] = useState('');
 
-    const [courses] = useState<TCourse[]>([]);
+    const {user} = useGlobalContext();
 
-    // useEffect(() => {
-    //     if (user){
-    //         fetch(`https://telegram-mini-app-x496.onrender.com/users/enrolled-courses?user_id=${user.id}`, 
-    //             {
-    //                 method: 'GET',
-    //                 headers: {
-    //                     'Content-Type': 'application/json'
-    //                 }
-    //             }
-    //         )
-    //         .then(response => response.json())
-    //         .then(data => {
-    //             setCourses(data);
-    //         })
-    //     }
-    // }, [user])
+    const [courses, setCourses] = useState<TCourse[]>([]);
+
+    useEffect(() => {
+        if (user){
+            fetch(`https://telegram-mini-app-x496.onrender.com/users/enrolled-courses?user_id=${user.id}`, 
+                {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }
+            )
+            .then(response => response.json())
+            .then(data => {
+                setCourses(data);
+            })
+        }
+    }, [user])
 
 
     return (
