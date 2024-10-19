@@ -6,16 +6,23 @@ export type TCourse = {
     description: string;
     createdAt?: string;
     updatedAt?: string;
+    is_enrolled: boolean;
 }
 
-
 export type TModule = {
-    id: number;
+    course_id: number;
+    description: string;
+    module_id: number;
+    position: number;
     title: string;
+    updatedAt: string;
 }
 
 export type TLesson = {
-    id: number;
+    description: string;
+    image_url: string;
+    lesson_id: number;
+    module_id: number;
+    position: number;
     title: string;
-    readingTime: string;
 }

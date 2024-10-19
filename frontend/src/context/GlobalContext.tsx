@@ -1,4 +1,5 @@
 import { TelegramUser } from '@/global';
+import { TCourse } from '@/lib/types';
 import React, {
   createContext,
   useState,
@@ -9,6 +10,8 @@ import React, {
 
 interface UserContextProps {
   user: TelegramUser | null;
+  course: TCourse | null;
+  setCourse: (course: TCourse | null) => void;
   setUser: React.Dispatch<React.SetStateAction<TelegramUser | null>>;
   isLoading: boolean;
 }
@@ -21,7 +24,12 @@ interface GlobalProviderProps {
 
 export const GlobalProvider: React.FC<GlobalProviderProps> = ({ children }) => {
   const [user, setUser] = useState<TelegramUser | null>(null);
+  const [course, setCourseData] = useState<TCourse | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  const setCourse = (course: TCourse | null) => {
+    setCourseData(course);
+  }
 
   useEffect(() => {
     if (window.Telegram?.WebApp) {
@@ -61,7 +69,7 @@ export const GlobalProvider: React.FC<GlobalProviderProps> = ({ children }) => {
   }, []);
 
   return (
-    <UserContext.Provider value={{ user, setUser, isLoading }}>
+    <UserContext.Provider value={{ user, setUser, setCourse, course, isLoading }}>
       {children}
     </UserContext.Provider>
   );
