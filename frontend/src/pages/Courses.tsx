@@ -56,10 +56,12 @@ const Courses = () => {
                 </Drawer>
                 
             </div>
+            <div className="w-full flex flex-col items-center gap-4">
+                {courses && courses.filter((course: TCourse) => course.title.toLowerCase().includes(query.toLowerCase())).map(courseData=>{
+                    return <CourseElement course={courseData}/>
+                })}
+            </div>
             
-            {courses && courses.filter((course: TCourse) => course.title.toLowerCase().includes(query.toLowerCase())).map(courseData=>{
-                return <CourseElement course={courseData}/>
-            })}
         </div>
     )
 }
