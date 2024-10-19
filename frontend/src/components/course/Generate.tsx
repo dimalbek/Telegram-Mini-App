@@ -13,6 +13,7 @@ import { Input } from "@/components/ui/input"
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { TypographyH3 } from "../ui/typography"
+import { useGlobalContext } from "@/context/GlobalContext"
  
 const formSchema = z.object({
     fieldName: z.string(),
@@ -20,6 +21,8 @@ const formSchema = z.object({
 })
 
 export const Generate = () => {
+
+    const { user } = useGlobalContext()
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -30,9 +33,12 @@ export const Generate = () => {
       })
 
       const handleSubmit = (data: z.infer<typeof formSchema>) => {
-        fetch(`https://telegram-mini-app-x496.onrender.com/courses/generate?learning_field=${data.fieldName}&description=${data.description}&user_id=${444368298}`, {
-            method: 'POST',
-        })
+        if (user) {
+            fetch(`https://telegram-mini-app-x496.onrender.com/courses/generate?learning_field=${data.fieldName}&description=${data.description}&user_id=${user.id}`, {
+                method: 'POST',
+            })
+        }
+        
       }
     
     return (
