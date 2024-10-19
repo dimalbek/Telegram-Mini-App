@@ -48,7 +48,7 @@ const Quiz = () => {
   // State to hold the quiz data
   const [quizData, setQuizData] = useState<QuizType | null>(null);
 
-  const {user, setUser, addTokens} = useGlobalContext();
+  const {user, addTokens} = useGlobalContext();
 
   // State to track the current question index
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
