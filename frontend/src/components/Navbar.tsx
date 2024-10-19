@@ -1,10 +1,8 @@
 import { useState } from 'react';
-import { useContext } from 'react';
-import { GlobalContext } from '@/context/GlobalContext';
+import { useGlobalContext } from '@/context/GlobalContext';
 
 const Navbar = () => {
-  const globalCtx = useContext(GlobalContext);
-  const {user} = globalCtx;
+  const {user} = useGlobalContext()
   const [counter, setCounter] = useState(0);
 
   return (

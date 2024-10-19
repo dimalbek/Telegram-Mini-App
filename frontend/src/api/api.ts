@@ -1,8 +1,8 @@
 
-const BASE_URL = "https://5939-178-91-253-84.ngrok-free.app/docs";
+const BASE_URL = "https://telegram-mini-app-x496.onrender.com";
 
 export async function fetchUserData(userId: number){
-    const url = `${BASE_URL}?user=${userId}`;
+    const url = `${BASE_URL}/users?user_id=${userId}`;
 
     const response = await fetch(url, {
         method: "POST"
