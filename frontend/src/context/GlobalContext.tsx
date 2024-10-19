@@ -52,7 +52,7 @@ export const GlobalProvider: React.FC<GlobalProviderProps> = ({ children }) => {
         id: 0,
         first_name: 'Developer',
         last_name: 'User',
-        token_balance: 0,
+        tokens_balance: 0,
       });
     }
     setIsLoading(false);
