@@ -15,7 +15,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { TypographyH3 } from "../ui/typography"
 import { useGlobalContext } from "@/context/GlobalContext"
 import { useState } from "react"
-import { useNavigate } from "react-router"
 import { Loader } from "lucide-react"
  
 const formSchema = z.object({
@@ -26,8 +25,7 @@ const formSchema = z.object({
 export const Generate = () => {
 
     const { user } = useGlobalContext()
-    const [loading, setLoading] = useState(false);
-    const navigate = useNavigate();
+    const [loading, setLoading] = useState(false)
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -47,8 +45,8 @@ export const Generate = () => {
             .then(() => {
                 setTimeout(() => {
                     setLoading(false)
-                    navigate('/courses')
-                }, 3000)
+                    window.location.reload()
+                }, 10000)
             })
         }
         
