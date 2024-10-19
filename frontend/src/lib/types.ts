@@ -22,6 +22,7 @@ export type TLesson = {
     description: string;
     image_url: string;
     lesson_id: number;
+    have_passed: boolean;
     module_id: number;
     position: number;
     title: string;
