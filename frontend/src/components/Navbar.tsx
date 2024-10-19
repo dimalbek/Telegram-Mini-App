@@ -17,6 +17,7 @@ const Navbar = () => {
         <div className="flex items-center space-x-4">
           <p className="text-xl font-bold">{user.tokens_balance}</p>
           <img src="https://cdn-icons-png.flaticon.com/128/10692/10692946.png" alt="" className='w-8 h-8'/>
+          <p>{user?.photo_url}</p>
           <img
               src={user?.photo_url || "https://vercel.com/api/www/avatar/kXwUVWYcKQiITwkzB8n8dJFC?s=64"}
               alt="Avatar"
