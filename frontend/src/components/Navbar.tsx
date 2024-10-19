@@ -11,7 +11,7 @@ const Navbar = () => {
         <div className="text-xl font-semibold">{`${user && user.first_name}`}</div>
 
         <div className="flex items-center space-x-4">
-          <span className="text-xl font-bold">{user.token_balance}</span>
+          <span className="text-xl font-bold">{user.tokens_balance}</span>
           <img src="https://cdn-icons-png.flaticon.com/128/10692/10692946.png" alt="" className='w-8 h-8'/>
         </div>
       </div>
