@@ -62,7 +62,7 @@ export const GlobalProvider: React.FC<GlobalProviderProps> = ({ children }) => {
         first_name: 'Developer',
         last_name: 'User',
         tokens_balance: 0,
-        imageUrl: ""
+        photo_url: ""
       });
     }
     setIsLoading(false);
