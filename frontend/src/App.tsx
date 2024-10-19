@@ -1,4 +1,4 @@
-import { createHashRouter, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Courses from './pages/Courses';
 import Course from './pages/Course';
 import Lesson from './pages/Lesson';
@@ -8,7 +8,7 @@ import Quiz from './pages/Quiz';
 import MainLayout from './layouts/MainLayout';
 import Profile from './pages/Profile';
 
-const router = createHashRouter([
+const router = createBrowserRouter([
   {
     path: "", 
     element: <MainLayout/>,
@@ -18,7 +18,7 @@ const router = createHashRouter([
         element: <Greeting />,
       },
       {
-        path: 'generate',
+        path: '/generate',
         element: <Generate />,
       },
       {
