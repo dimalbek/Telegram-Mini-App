@@ -6,52 +6,52 @@ import { X } from 'lucide-react';
 import { Button } from "@/components/ui/button"
 import { useNavigate, useParams } from 'react-router';
 
-const QUIZDATA = {
-    "quiz": [
-      {
-        "id": 1,
-        "question_type": "text",
-        "question": "What is the capital city of France?",
-        "options": [
-          "Berlin",
-          "Madrid",
-          "Paris",
-          "Rome",
-          "London"
-        ],
-        "correct_answer": "Paris"
-      },
-      {
-        "id": 2,
-        "question_type": "image_and_text",
-        "question": "Identify the animal in the image and select its correct species name.",
-        "image_url": "https://example.com/lion.jpg",
-        "text": "The image shows a large feline animal known for its majestic mane.",
-        "options": [
-          "Tiger",
-          "Leopard",
-          "Cheetah",
-          "Lion",
-          "Jaguar"
-        ],
-        "correct_answer": "Lion"
-      },
-      {
-        "id": 3,
-        "question_type": "image",
-        "question": "Which of the following images is a famous painting by Vincent van Gogh?",
-        "image_url": "https://example.com/starry_night.jpg",
-        "options": [
-          "Mona Lisa",
-          "Starry Night",
-          "The Scream",
-          "The Persistence of Memory",
-          "Girl with a Pearl Earring"
-        ],
-        "correct_answer": "Starry Night"
-      }
-    ]
-};
+// const QUIZDATA = {
+//     "quiz": [
+//       {
+//         "id": 1,
+//         "question_type": "text",
+//         "question": "What is the capital city of France?",
+//         "options": [
+//           "Berlin",
+//           "Madrid",
+//           "Paris",
+//           "Rome",
+//           "London"
+//         ],
+//         "correct_answer": "Paris"
+//       },
+//       {
+//         "id": 2,
+//         "question_type": "image_and_text",
+//         "question": "Identify the animal in the image and select its correct species name.",
+//         "image_url": "https://example.com/lion.jpg",
+//         "text": "The image shows a large feline animal known for its majestic mane.",
+//         "options": [
+//           "Tiger",
+//           "Leopard",
+//           "Cheetah",
+//           "Lion",
+//           "Jaguar"
+//         ],
+//         "correct_answer": "Lion"
+//       },
+//       {
+//         "id": 3,
+//         "question_type": "image",
+//         "question": "Which of the following images is a famous painting by Vincent van Gogh?",
+//         "image_url": "https://example.com/starry_night.jpg",
+//         "options": [
+//           "Mona Lisa",
+//           "Starry Night",
+//           "The Scream",
+//           "The Persistence of Memory",
+//           "Girl with a Pearl Earring"
+//         ],
+//         "correct_answer": "Starry Night"
+//       }
+//     ]
+// };
   
 interface UserAnswer {
     questionId: number,
