@@ -31,7 +31,7 @@ export const GlobalProvider: React.FC<GlobalProviderProps> = ({ children }) => {
 
       const userData = WebApp.initDataUnsafe.user;
       if (userData) {
-        fetch(`https://telegram-mini-app-x496.onrender.com/users`, {
+        fetch(`https://telegram-mini-app-x496.onrender.com/users/`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
