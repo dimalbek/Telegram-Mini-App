@@ -11,3 +11,7 @@ export async function fetchUserData(userId: number){
     return data;
 }
 
+export async function fetchUserCourses(userId){
+    return 1
+}
+

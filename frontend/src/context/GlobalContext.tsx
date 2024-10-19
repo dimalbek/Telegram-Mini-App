@@ -1,3 +1,4 @@
+import { fetchUserData } from '@/api/api';
 import { TelegramUser } from '@/global';
 import React, {
   createContext,
@@ -28,7 +29,7 @@ export const GlobalProvider: React.FC<GlobalProviderProps> = ({ children }) => {
       const { WebApp } = window.Telegram;
 
       WebApp.ready();
-
+      
       const userData = WebApp.initDataUnsafe.user;
       if (userData) {
         setUser(userData);
