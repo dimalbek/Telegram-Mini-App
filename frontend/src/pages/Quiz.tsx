@@ -5,6 +5,7 @@ import { X } from 'lucide-react';
 // import Question from '@/components/Question';
 import { Button } from "@/components/ui/button"
 import { useNavigate, useParams } from 'react-router';
+import { Link } from 'react-router-dom';
 
 export interface Question {
   question_id: number;
@@ -103,7 +104,6 @@ const Quiz = () => {
         if (response.ok){
           setSubmitted(true);
         }
-        navigate("/");
       };
       submitQuiz();
     }
@@ -151,7 +151,7 @@ const Quiz = () => {
   }
   
 
-  if (isQuizFinished) {
+  if (isQuizFinished && submitted) {
     const correctAnswersCount = userAnswers.filter((ans) => ans.isCorrect).length;
     return (
       <div className="max-w-2xl mx-auto p-4">
@@ -168,8 +168,9 @@ const Quiz = () => {
             setUserAnswers([]);
             setIsQuizFinished(false);
           }}
+          asChild
         >
-          Retake Quiz
+          <Link to={`/courses/${courseId}`}>Return to Course</Link>
         </Button>
       </div>
     );
