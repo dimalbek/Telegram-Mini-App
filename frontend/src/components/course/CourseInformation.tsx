@@ -10,11 +10,11 @@ interface CourseInformationProps {
 //@ts-ignore
 const CourseInformation: FC<CourseInformationProps> = ({}) => {
 
-  const {course, setCourse} = useGlobalContext();
+  const {user, course, setCourse} = useGlobalContext();
 
   const handleEnroll = () => {
-    if (course) {
-      fetch(`https://telegram-mini-app-x496.onrender.com/courses/${course?.course_id}/enroll?user_id=444368298`, {
+    if (course && user) {
+      fetch(`https://telegram-mini-app-x496.onrender.com/courses/${course?.course_id}/enroll?user_id=${user.id}`, {
           method: 'GET',
           headers: {
               'Content-Type': 'application/json'
