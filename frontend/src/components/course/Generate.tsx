@@ -45,7 +45,7 @@ export const Generate = () => {
             .then(() => {
                 setTimeout(() => {
                     setLoading(false)
-                    window.location.href = '/courses'
+                    window.location.href = '/'
                 }, 10000)
             })
         }

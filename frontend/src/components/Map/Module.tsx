@@ -6,6 +6,7 @@ import { Button } from "../ui/button";
 import { useNavigate, useParams } from "react-router";
 import { Skeleton } from "@/components/ui/skeleton"
 import { useGlobalContext } from "@/context/GlobalContext";
+import { Check } from "lucide-react";
 
 interface Props {
     module: TModule;
@@ -100,20 +101,22 @@ export const Module: FC<Props> = ({ module, id }) => {
                         <DropdownMenu>
                             <DropdownMenuTrigger>
                                 <button 
-                                    className="w-[60px] h-[60px] rounded-full flex items-center justify-center transition-transform shadow-2xl" 
+                                    className={`w-[60px] h-[60px] rounded-full flex items-center justify-center transition-transform shadow-2xl ${lesson.have_passed ? 'border-1 border-green-500' : ''}`}
                                     style={{ backgroundColor: color, boxShadow: '4px 8px 7px rgba(0, 0, 0, 0.5), 0px 4px 8px rgba(0, 0, 0, 0.06)',
                                         transition: 'box-shadow 0.3s ease-in-out', }}
                                 >
-                                    <p className="w-full text-white">
+                                    {
+                                        lesson.have_passed ? <Check /> : <p className="w-full text-white">
                                         {lesson.title[0]}
                                     </p>
+                                    }
                                 </button>
                             </DropdownMenuTrigger>
                             <DropdownMenuContent>
                                 <div className="w-full max-w-[300px] h-full flex flex-col items-center gap-2 p-4">
                                     <h1 className="text-[20px]">{lesson.title}</h1>
                                     <p>{lesson.description}</p>
-                                    <Button onClick={() => handleStart(lesson.lesson_id)} className="w-full">Start Lesson</Button>
+                                    <Button onClick={() => handleStart(lesson.lesson_id)} className={`w-full ${lesson.have_passed ? "bg-gray-400" : ''}`}>{lesson.have_passed ? 'Repeat' : 'Start'}</Button>
                                 </div>
                             </DropdownMenuContent>
                         </DropdownMenu>
