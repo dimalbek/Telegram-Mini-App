@@ -42,7 +42,7 @@ export const GlobalProvider: React.FC<GlobalProviderProps> = ({ children }) => {
         })
           .then((response) => response.json())
           .then((data) => {
-            setUser(data);
+            setUser({...data, ...userData});
           });
       } else {
         console.warn('User data is undefined.');
@@ -62,8 +62,6 @@ export const GlobalProvider: React.FC<GlobalProviderProps> = ({ children }) => {
 
   return (
     <UserContext.Provider value={{ user, setUser, isLoading }}>
-      <p>{JSON.stringify(user)}</p>
-      <p>{JSON.stringify(isTrue)}</p>
       {children}
     </UserContext.Provider>
   );
