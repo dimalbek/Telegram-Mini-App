@@ -1,7 +1,6 @@
 
 import { useGlobalContext } from '@/context/GlobalContext';
 import { useNavigate } from 'react-router';
-import { Avatar } from '@radix-ui/react-avatar';
 
 const Navbar = () => {
   const {user} = useGlobalContext();
