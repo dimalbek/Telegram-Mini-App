@@ -5,6 +5,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "../ui/dr
 import { Button } from "../ui/button";
 import { useNavigate, useParams } from "react-router";
 import { Skeleton } from "@/components/ui/skeleton"
+import { useGlobalContext } from "@/context/GlobalContext";
 
 interface Props {
     module: TModule;
@@ -18,6 +19,7 @@ export const Module: FC<Props> = ({ module, id }) => {
     const navigate = useNavigate()
     const params = useParams();
     const [loaded, setLoaded] = useState<boolean>(false);
+    const {user} = useGlobalContext();
 
     // Function to generate a random color for the lesson button
     const randomColor = () => {
@@ -30,30 +32,32 @@ export const Module: FC<Props> = ({ module, id }) => {
     };
 
     useEffect(() => {
-        // Fetch lessons data from the API
-        fetch(`https://telegram-mini-app-x496.onrender.com/modules/${module.module_id}/lessons?user_id=444368298`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            setLessons(data);
-            const inoffsets = new Array(data.length).fill(0);
-            let prev = 0;
-            // @ts-ignore 
-            const offsets = inoffsets.map((off: number, index: number) => {
-                if (index === 0) return 0;
-                const direction = Math.random() > 0.5 ? 1 : -1;
-                prev += (direction * 25);
-                return prev
+        if (user) {
+            fetch(`https://telegram-mini-app-x496.onrender.com/modules/${module.module_id}/lessons?user_id=${user.id}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                setLessons(data);
+                const inoffsets = new Array(data.length).fill(0);
+                let prev = 0;
+                // @ts-ignore 
+                const offsets = inoffsets.map((off: number, index: number) => {
+                    if (index === 0) return 0;
+                    const direction = Math.random() > 0.5 ? 1 : -1;
+                    prev += (direction * 25);
+                    return prev
+                });
+                setOffsets(offsets);
             });
-            setOffsets(offsets);
-        });
-
-        setColor(randomColor());
-    }, [module]);
+    
+            setColor(randomColor());
+        }
+        
+    }, [module, user]);
 
     useEffect(() => {
         setTimeout(() => {

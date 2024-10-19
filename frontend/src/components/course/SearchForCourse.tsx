@@ -11,18 +11,21 @@ export const SearchForCourse = () => {
     const [courses, setCourses] = useState<TCourse[]>([])
 
     useEffect(() => {
-        fetch(`https://telegram-mini-app-x496.onrender.com/courses?user_id=${user?.id || '444368298'}`, 
-        {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            }
+        if (user) {
+            fetch(`https://telegram-mini-app-x496.onrender.com/courses?user_id=${user?.id || '444368298'}`, 
+                {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }
+                )
+                .then(response => response.json())
+                .then(data => {
+                    setCourses(data.objects)
+                })
         }
-        )
-        .then(response => response.json())
-        .then(data => {
-            setCourses(data.objects)
-        })
+        
     }, [])
 
     return (
