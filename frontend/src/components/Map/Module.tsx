@@ -101,7 +101,7 @@ export const Module: FC<Props> = ({ module, id }) => {
                         <DropdownMenu>
                             <DropdownMenuTrigger>
                                 <button 
-                                    className={`w-[60px] h-[60px] rounded-full flex items-center justify-center transition-transform shadow-2xl ${lesson.have_passed ? 'border border-green-500' : ''}`}
+                                    className={`w-[60px] h-[60px] rounded-full flex items-center justify-center transition-transform shadow-2xl ${lesson.have_passed ? 'border-1 border-green-500' : ''}`}
                                     style={{ backgroundColor: color, boxShadow: '4px 8px 7px rgba(0, 0, 0, 0.5), 0px 4px 8px rgba(0, 0, 0, 0.06)',
                                         transition: 'box-shadow 0.3s ease-in-out', }}
                                 >
@@ -116,7 +116,7 @@ export const Module: FC<Props> = ({ module, id }) => {
                                 <div className="w-full max-w-[300px] h-full flex flex-col items-center gap-2 p-4">
                                     <h1 className="text-[20px]">{lesson.title}</h1>
                                     <p>{lesson.description}</p>
-                                    <Button onClick={() => handleStart(lesson.lesson_id)} className="w-full">Start Lesson</Button>
+                                    <Button onClick={() => handleStart(lesson.lesson_id)} className={`w-full ${lesson.have_passed ? "bg-gray-400" : ''}`}>{lesson.have_passed ? 'Repeat' : 'Start'}</Button>
                                 </div>
                             </DropdownMenuContent>
                         </DropdownMenu>
