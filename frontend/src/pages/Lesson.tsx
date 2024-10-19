@@ -1,5 +1,7 @@
 import { useParams } from 'react-router';
 import { Separator } from "@/components/ui/separator";
+import AudioPlayer from '@/components/AudioPlayer';
+
 import {
     Breadcrumb,
     BreadcrumbEllipsis,
@@ -16,7 +18,9 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { useEffect, useState } from 'react';
-import { BASE_URL } from '@/api/api';
+import { useNavigate } from 'react-router';
+
+// import { BASE_URL } from '@/api/api';
 
 // const lesson = {
 //   "id": 1,
@@ -96,11 +100,14 @@ interface LessonData {
   description: string,
   position: number,
   content: LessonContent[],
-  imageUrl: string
+  image_url: string
 }
+
+
   
 
-
+const BASE_URL = "https://telegram-mini-app-x496.onrender.com";
+import { useGlobalContext } from '@/context/GlobalContext';
 const Lesson = () => {
 
     const params = useParams();
@@ -110,19 +117,23 @@ const Lesson = () => {
     const [error, setError] = useState('');
     const [data, setData] = useState({} as LessonData);
 
+    const {user} = useGlobalContext();
+
 
     useEffect(()=>{
       if (courseId && moduleId && lessonId){
         async function fetchLessonData(lessonId: string){
           setIsLoading(true);
-          const url = `${BASE_URL}/lessons/${lessonId}`;
+          const url = `${BASE_URL}/lessons/${lessonId}?user_id=${444368298}`;
           const response = await fetch(url, {
               method: "GET",
               headers: {
-                  'Content-Type': 'application/json'
+                  'Content-Type': 'application/json',
+                  'Accept': 'application/json'
               }
           });
           if (response.ok){
+            console.log(response)
             const data = await response.json();
             console.log(data);
             setIsLoading(false);
@@ -136,30 +147,33 @@ const Lesson = () => {
         }
         fetchLessonData(lessonId);
       }
-    }, [courseId, moduleId, lessonId]);
+    }, [courseId, moduleId, lessonId, user]);
 
     const content = data.content;
     console.log(data, content); 
+
+    const navigate = useNavigate();
 
     return (
       <>
         {data && <div>
             <div className="max-w-4xl mx-auto p-6 bg-white shadow-md rounded-lg">
                 {/*<BreadcrumbDemo />*/}
-                <div className="flex flex-col items-stretch justify-between h-full">
-                    <div className="w-full md:w-1/2 pr-6">
-                    <img
-                        src={data.imageUrl}
-                        alt={data.title}
-                        className="rounded-lg object-cover w-full h-full"
-                    />
-                    </div>
-                    <div className="w-full h-full md:w-1/2 flex flex-col justify-center space-y-4 flex-1">
+                <div className="flex flex-col items-stretch justify-between h-full gap-4">
+                    <div className="w-full h-full md:w-1/2 flex flex-col justify-center flex-1">
                         <h1 className="text-3xl font-bold">{data.title}</h1>
                         <p className="text-gray-700">{data.description}</p>
                     </div>
+                    <div className="w-full md:w-1/2 pr-6">
+                      <img
+                          src={data.image_url}
+                          alt={data.title}
+                          className="rounded-lg object-cover w-full h-full"
+                      />
+                    </div>
                 </div>
                 <Separator className="mt-8 h-1 rounded-3xl bg-blue-500" />
+                {/* {lessonId && <AudioPlayer lessonId={lessonId}/>} */}
                 <div className='mt-16'>
                     <h3 className='w-fit m-auto text-2xl font-semibold'>Введение</h3>
                 </div>
@@ -197,7 +211,7 @@ const Lesson = () => {
                         }
                     )}
                 </div>
-                <button className="w-full bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600">
+                <button className="w-full bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600" onClick={()=>navigate("quiz")}>
                     Go to Quiz
                 </button>
             </div>
