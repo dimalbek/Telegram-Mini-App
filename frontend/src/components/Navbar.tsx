@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router';
 
 const Navbar = () => {
   const {user} = useGlobalContext();
-
+  
   const navigate = useNavigate();
 
   if (!user) return null;
@@ -16,6 +16,7 @@ const Navbar = () => {
         <div className="flex items-center space-x-4">
           <span className="text-xl font-bold">{user.tokens_balance}</span>
           <img src="https://cdn-icons-png.flaticon.com/128/10692/10692946.png" alt="" className='w-8 h-8'/>
+          <img src={user?.photo_url || "https://vercel.com/api/www/avatar/kXwUVWYcKQiITwkzB8n8dJFC?s=64"} alt="" className='w-8 h-8'/>
         </div>
       </div>
     </nav>
