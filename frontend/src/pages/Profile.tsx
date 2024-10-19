@@ -1,6 +1,5 @@
 
 import { useGlobalContext } from '@/context/GlobalContext';
-import { Avatar } from "@/components/ui/avatar"
 import { Card, CardContent} from "@/components/ui/card"
 
 function CalendarIcon(props: any) {
