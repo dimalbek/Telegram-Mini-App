@@ -15,6 +15,7 @@ import { TCourse } from '@/lib/types';
 
 import { useGlobalContext } from '@/context/GlobalContext';
 const Courses = () => {
+    
     // @ts-ignore
     const [data, setData] = useState([]);
     const [query, setQuery] = useState('');
