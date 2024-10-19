@@ -53,13 +53,11 @@ const Profile = () => {
         <div className="grid max-w-3xl gap-8 px-4 mx-auto lg:grid-cols-2 lg:gap-6 xl:gap-10 py-8">
           <div className="space-y-4 lg:col-span-2">
             <div className="flex items-center space-x-4 gap-8">
-              <Avatar className="w-32 h-32">
-                <img
+              <img
                   src={user?.photo_url || "https://vercel.com/api/www/avatar/kXwUVWYcKQiITwkzB8n8dJFC?s=64"}
                   alt="Avatar"
-                  className="rounded-full object-cover"
+                  className="rounded-full object-cover w-20 h-20"
                 />
-              </Avatar>
               <div className="space-y-1">
                 <h1 className="text-3xl font-bold">{`${user?.first_name || 'No User'} ${user?.last_name || 'Found'}`}</h1>
                 <p className="text-gray-500 dark:text-gray-400">Senior Software Engineer</p>
