@@ -15,18 +15,21 @@ import { TCourse } from '@/lib/types';
 import { useContext } from 'react';
 import { UserContext } from '@/context/GlobalContext';
 
+import { useGlobalContext } from '@/context/GlobalContext';
 const Courses = () => {
     // @ts-ignore
     const [data, setData] = useState([]);
     const [query, setQuery] = useState('');
 
-    const userCtx = useContext(UserContext);
-    const {user, userId, setCourses, courses} = userCtx;
-    console.log(courses, userId);
+    const {user} = useGlobalContext();
+
+    const [courses, setCourses] = useState();
+
+    console.log(courses);
     
     useEffect(() => {
-        if (userId){
-            fetch(`https://telegram-mini-app-x496.onrender.com/users/enrolled-courses?user_id=${userId}`, 
+        if (user  && user.id){
+            fetch(`https://telegram-mini-app-x496.onrender.com/users/enrolled-courses?user_id=${user.id}`, 
                 {
                     method: 'GET',
                     headers: {
@@ -39,7 +42,7 @@ const Courses = () => {
                 setCourses(data);
             })
         }
-    }, [userId])
+    }, [user])
 
 
     return (
