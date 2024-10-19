@@ -12,7 +12,7 @@ const Navbar = () => {
     <nav className="p-3 border-b-2">
       <div className="max-w-7xl mx-auto flex justify-between items-center">
         <div onClick={()=>navigate('/')}>
-          <p className="text-xl font-semibold">{`${user && user.first_name}`}</p></div>
+          <p className="text-xl font-semibold">tLMS</p></div>
 
         <div className="flex items-center space-x-4">
           <p className="text-xl font-bold">{user.tokens_balance}</p>
