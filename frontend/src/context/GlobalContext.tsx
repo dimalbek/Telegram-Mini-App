@@ -38,6 +38,7 @@ export const GlobalProvider: React.FC<GlobalProviderProps> = ({ children }) => {
       WebApp.ready();
 
       const userData = WebApp.initDataUnsafe.user;
+      console.log(userData);
       if (userData) {
         fetch(`https://telegram-mini-app-x496.onrender.com/users/`, {
           method: 'POST',
@@ -61,6 +62,7 @@ export const GlobalProvider: React.FC<GlobalProviderProps> = ({ children }) => {
         first_name: 'Developer',
         last_name: 'User',
         tokens_balance: 0,
+        photo_url: ""
       });
     }
     setIsLoading(false);

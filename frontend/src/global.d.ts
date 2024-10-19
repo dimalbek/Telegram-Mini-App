@@ -12,6 +12,7 @@ export interface TelegramUser {
     username?: string;
     language_code?: string;
     tokens_balance: number;
+    photo_url: string;
   }
   
   export interface ThemeParams {
