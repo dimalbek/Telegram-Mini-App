@@ -12,6 +12,9 @@ interface UserContextProps {
   user: TelegramUser | null;
   setUser: React.Dispatch<React.SetStateAction<TelegramUser | null>>;
   isLoading: boolean;
+  courses: any;
+  setCourses: any;
+  userId: number;
 }
 
 export const UserContext = createContext<UserContextProps | undefined>(undefined);
@@ -22,31 +25,51 @@ interface GlobalProviderProps {
 
 export const GlobalProvider: React.FC<GlobalProviderProps> = ({ children }) => {
   const [user, setUser] = useState<TelegramUser | null>(null);
+  const [userId, setUserId] = useState(12341241);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [courses, setCourses] = useState(null);
+
+
+  console.log(courses);
 
   useEffect(() => {
+
+    fetch(`https://telegram-mini-app-x496.onrender.com/users`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({user_id: userId}),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            setUser(data);
+    });
     if (window.Telegram?.WebApp) {
       const { WebApp } = window.Telegram;
 
       WebApp.ready();
       
       const userData = WebApp.initDataUnsafe.user;
-      if (userData) {
-        fetch(`https://telegram-mini-app-x496.onrender.com/users`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({user_id: userData.id}),
-        })
-          .then((response) => response.json())
-          .then((data) => {
-            setUser(data);
-          });
-      } else {
-        console.warn('User data is undefined.');
-        setUser(null);
-      }
+      // if (userData) {
+      //   fetch(`https://telegram-mini-app-x496.onrender.com/users`, {
+      //     method: 'POST',
+      //     headers: {
+      //       'Content-Type': 'application/json',
+      //     },
+      //     body: JSON.stringify({user_id: userData.id}),
+      //   })
+      //     .then((response) => response.json())
+      //     .then((data) => {
+      //       setUser(data);
+      //   });
+      //   // setTimeout(()=>{
+      //   //   setUser();
+      //   // }, 500);
+      // } else {
+      //   console.warn('User data is undefined.');
+      //   setUser(null);
+      // }
     } else {
       console.warn('Not running inside Telegram.');
       setUser({
@@ -59,8 +82,13 @@ export const GlobalProvider: React.FC<GlobalProviderProps> = ({ children }) => {
     setIsLoading(false);
   }, []);
 
+
+  function getUserData(){
+
+  }
+
   return (
-    <UserContext.Provider value={{ user, setUser, isLoading }}>
+    <UserContext.Provider value={{ user, setUser, isLoading, courses, setCourses, userId}}>
       {children}
     </UserContext.Provider>
   );

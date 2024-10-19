@@ -12,26 +12,34 @@ import {
     DrawerTrigger,
   } from "@/components/ui/drawer"
 import { TCourse } from '@/lib/types';
+import { useContext } from 'react';
+import { UserContext } from '@/context/GlobalContext';
 
 const Courses = () => {
     // @ts-ignore
     const [data, setData] = useState([]);
     const [query, setQuery] = useState('');
 
+    const userCtx = useContext(UserContext);
+    const {user, userId, setCourses, courses} = userCtx;
+    console.log(courses, userId);
+    
     useEffect(() => {
-        fetch('https://telegram-mini-app-x496.onrender.com/courses/', 
-        {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            }
+        if (userId){
+            fetch(`https://telegram-mini-app-x496.onrender.com/users/enrolled-courses?user_id=${userId}`, 
+                {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }
+            )
+            .then(response => response.json())
+            .then(data => {
+                setCourses(data);
+            })
         }
-        )
-        .then(response => response.json())
-        .then(data => {
-            setData(data.objects)
-        })
-    }, [])
+    }, [userId])
 
 
     return (
