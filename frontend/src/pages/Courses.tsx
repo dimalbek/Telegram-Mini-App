@@ -24,8 +24,8 @@ const Courses = () => {
     const [courses, setCourses] = useState<TCourse[]>([]);
 
     useEffect(() => {
-        if (true){
-            fetch(`https://telegram-mini-app-x496.onrender.com/users/enrolled-courses?user_id=${444368298}`, 
+        if (user){
+            fetch(`https://telegram-mini-app-x496.onrender.com/users/enrolled-courses?user_id=${user.id}`, 
                 {
                     method: 'GET',
                     headers: {

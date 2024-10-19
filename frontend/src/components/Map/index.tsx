@@ -5,12 +5,12 @@ import { Module } from "./Module";
 
 
 export const Map = () => {
-    const {course} = useGlobalContext();
+    const {course, user} = useGlobalContext();
     const [modules, setModules] = useState<TModule[]>([]);
 
     useEffect(() => {
-        if (course) {
-            fetch(`https://telegram-mini-app-x496.onrender.com/courses/${course?.course_id}/modules?user_id=444368298`, {
+        if (course && user) {
+            fetch(`https://telegram-mini-app-x496.onrender.com/courses/${course?.course_id}/modules?user_id=${user.id}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json'
@@ -21,7 +21,7 @@ export const Map = () => {
                 setModules(data)
             })
         }
-    }, [course])
+    }, [course, user])
 
     return (
         <div className="w-full flex flex-col items-center gap-4">
