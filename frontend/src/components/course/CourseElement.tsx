@@ -8,6 +8,7 @@ interface Props {
 }
 
 const CourseElement: FC<Props> = ({course}) => {
+  console.log(course);
   if (!course) return
     return (
         <Link to={`/courses/${course.course_id}`} className="max-w-md mx-auto bg-white rounded-lg shadow-md p-6 flex items-center hover:cursor-pointer">

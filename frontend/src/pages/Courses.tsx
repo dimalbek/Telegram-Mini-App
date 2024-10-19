@@ -21,13 +21,11 @@ const Courses = () => {
 
     const {user} = useGlobalContext();
 
-    const [courses, setCourses] = useState();
-
-    console.log(courses);
+    const [courses, setCourses] = useState<TCourse[]>([]);
 
     useEffect(() => {
-        if (user  && user.id){
-            fetch(`https://telegram-mini-app-x496.onrender.com/users/enrolled-courses?user_id=${user.id}`, 
+        if (true){
+            fetch(`https://telegram-mini-app-x496.onrender.com/users/enrolled-courses?user_id=${741136495}`, 
                 {
                     method: 'GET',
                     headers: {
@@ -59,7 +57,7 @@ const Courses = () => {
                 
             </div>
             
-            {data && data.filter((course: TCourse) => course.title.toLowerCase().includes(query.toLowerCase())).map(courseData=>{
+            {courses && courses.filter((course: TCourse) => course.title.toLowerCase().includes(query.toLowerCase())).map(courseData=>{
                 return <CourseElement course={courseData}/>
             })}
         </div>
