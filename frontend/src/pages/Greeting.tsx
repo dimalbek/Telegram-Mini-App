@@ -11,6 +11,7 @@ export const Greeting = () => {
 
     const { user } = useGlobalContext();
 
+
   
     return (
       <main
