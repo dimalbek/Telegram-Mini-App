@@ -2,10 +2,14 @@
 const BASE_URL = "https://telegram-mini-app-x496.onrender.com";
 
 export async function fetchUserData(userId: number){
-    const url = `${BASE_URL}/users?user_id=${userId}`;
-
+    const url = `${BASE_URL}/users`;
+    const body = JSON.stringify({user_id: userId});
     const response = await fetch(url, {
-        method: "POST"
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body
     });
     const data = await response.json();
     return data;
