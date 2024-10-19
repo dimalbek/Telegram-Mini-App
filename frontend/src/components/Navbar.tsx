@@ -9,7 +9,7 @@ const Navbar = () => {
 
   if (!user) return null;
   return (
-    <nav className="text-white p-3 border-b-2">
+    <nav className="p-3 border-b-2">
       <div className="max-w-7xl mx-auto flex justify-between items-center">
         <div onClick={()=>navigate('/')}>
           <p className="text-xl font-semibold">{`${user && user.first_name}`}</p></div>
