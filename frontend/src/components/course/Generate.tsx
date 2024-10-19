@@ -24,7 +24,7 @@ const formSchema = z.object({
 
 export const Generate = () => {
 
-    const { user } = useGlobalContext()
+    const { user, retractTokens } = useGlobalContext()
     const [loading, setLoading] = useState(false)
 
     const form = useForm<z.infer<typeof formSchema>>({
@@ -35,6 +35,7 @@ export const Generate = () => {
         },
       })
 
+
       const handleSubmit = (data: z.infer<typeof formSchema>) => {
         if (user) {
             setLoading(true)
@@ -43,6 +44,7 @@ export const Generate = () => {
             })
             .then(response => response.json())
             .then(() => {
+                retractTokens();
                 setTimeout(() => {
                     setLoading(false)
                     window.location.href = '/'

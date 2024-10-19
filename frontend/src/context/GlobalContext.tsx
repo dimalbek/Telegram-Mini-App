@@ -14,6 +14,8 @@ interface UserContextProps {
   setCourse: (course: TCourse | null) => void;
   setUser: React.Dispatch<React.SetStateAction<TelegramUser | null>>;
   isLoading: boolean;
+  addTokens: any;
+  retractTokens: any;
 }
 
 export const UserContext = createContext<UserContextProps | undefined>(undefined);
@@ -29,6 +31,17 @@ export const GlobalProvider: React.FC<GlobalProviderProps> = ({ children }) => {
   
   const setCourse = (course: TCourse | null) => {
     setCourseData(course);
+  }
+
+  function addTokens(quantity: number){
+    if (user?.tokens_balance){
+      user.tokens_balance+=50*quantity;
+    }
+  }
+  function retractTokens(){
+    if (user?.tokens_balance && user.tokens_balance>=500){
+      user.tokens_balance-=500;
+    }
   }
 
   useEffect(() => {
@@ -69,7 +82,7 @@ export const GlobalProvider: React.FC<GlobalProviderProps> = ({ children }) => {
   }, []);
 
   return (
-    <UserContext.Provider value={{ user, setUser, setCourse, course, isLoading }}>
+    <UserContext.Provider value={{ user, setUser, setCourse, course, isLoading, addTokens, retractTokens }}>
       {children}
     </UserContext.Provider>
   );

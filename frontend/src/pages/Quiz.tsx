@@ -48,7 +48,7 @@ const Quiz = () => {
   // State to hold the quiz data
   const [quizData, setQuizData] = useState<QuizType | null>(null);
 
-  const {user} = useGlobalContext();
+  const {user, setUser, addTokens} = useGlobalContext();
 
   // State to track the current question index
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
@@ -90,10 +90,15 @@ const Quiz = () => {
       fetchQuizData();
   }, []);
 
+  const correctAnswers = userAnswers.filter((ans) => ans.isCorrect).length;
+
+
+
   useEffect(()=>{
     if (isQuizFinished && !submitted && user && quizData){
       const submitQuiz = async () => {
-        const url = `${BASE_URL}/lessons/${lessonId}/quiz/submit?user_id=${user.id}&correct_answers=${userAnswers.filter((ans) => ans.isCorrect).length}&total_questions=${quizData.questions.length}`;
+        const url = `${BASE_URL}/lessons/${lessonId}/quiz/submit?user_id=${user.id}&correct_answers=${correctAnswers}&total_questions=${quizData.questions.length}`;
+        addTokens(correctAnswers);
         const response = await fetch(url, {
             method: "POST",
             headers: {
