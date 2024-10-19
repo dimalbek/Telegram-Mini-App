@@ -1,79 +1,63 @@
-import {createContext, useState, useMemo} from 'react';
+import { TelegramUser } from '@/global';
+import React, {
+  createContext,
+  useState,
+  useEffect,
+  ReactNode,
+  useContext,
+} from 'react';
 
-export const GlobalContext = createContext({} as GlobalContextProps);
-
-export interface User {
-    id: number;
-    name: string;
-    first_name: string, 
-    last_name: string
-}
-  
-export interface Course {
-    id: number;
-    title: string;
-}
-
-export interface GlobalState {
-    user: User | null;
-    courses: Course[];
-    notifications?: Notification[];
+interface UserContextProps {
+  user: TelegramUser | null;
+  setUser: React.Dispatch<React.SetStateAction<TelegramUser | null>>;
+  isLoading: boolean;
 }
 
-export interface GlobalContextProps extends GlobalState {
-    courses: Course[];
-    enrollCourse?: (course: Course) => void;
-    unenrollCourse?: (courseId: number) => void;
-    setUser: any,
-    fetchData: () => {},
-    loading: boolean,
-    error: any,
-    userData: any
+export const UserContext = createContext<UserContextProps | undefined>(undefined);
+
+interface GlobalProviderProps {
+  children: ReactNode;
 }
 
-import { fetchUserData } from '@/api/api';
+export const GlobalProvider: React.FC<GlobalProviderProps> = ({ children }) => {
+  const [user, setUser] = useState<TelegramUser | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
-export const GlobalProvider = ({ children }: {children: any}) => {
-    const [user, setUser] = useState<User>({} as User);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
-    const [userData, setUserData] = useState();
+  useEffect(() => {
+    if (window.Telegram?.WebApp) {
+      const { WebApp } = window.Telegram;
 
-    const fetchData = async () => {
-      setLoading(true);
-      setError(null);
-      try {
-        const response = await fetchUserData(user.id);
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const result = await response.json();
-        setUserData(result);
-      } catch (err:any) {
-        setError(err.message || 'Something went wrong');
-      } finally {
-        setLoading(false);
+      WebApp.ready();
+
+      const userData = WebApp.initDataUnsafe.user;
+      if (userData) {
+        setUser(userData);
+      } else {
+        console.warn('User data is undefined.');
+        setUser(null);
       }
-    };
-    
-    // @ts-ignore
-    const [courses, setCourses] = useState([]);
-// @ts-ignore
-    const contextValue = useMemo(
-      () => ({
-        user,
-        courses,
-      }),
-      [user, courses]
-    );
+    } else {
+      console.warn('Not running inside Telegram.');
+      setUser({
+        id: 0,
+        first_name: 'Developer',
+        last_name: 'User',
+      });
+    }
+    setIsLoading(false);
+  }, []);
 
-  
-    return (
-      <GlobalContext.Provider value={{user, courses, setUser, userData, loading, error, fetchData}}>
-        {children}
-      </GlobalContext.Provider>
-    );
+  return (
+    <UserContext.Provider value={{ user, setUser, isLoading }}>
+      {children}
+    </UserContext.Provider>
+  );
 };
 
-export default GlobalProvider;
-
+export const useGlobalContext = (): UserContextProps => {
+  const context = useContext(UserContext);
+  if (context === undefined) {
+    throw new Error('useGlobalContext must be used within a GlobalProvider');
+  }
+  return context;
+};

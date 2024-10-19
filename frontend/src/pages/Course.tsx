@@ -1,6 +1,5 @@
 
 import { useParams } from 'react-router-dom';
-import { COURSESDATA } from '../assets/courses';
 import CourseInformation from '../components/course/CourseInformation';
 import { TCourse } from '../lib/types';
 import { useEffect, useState } from 'react';
