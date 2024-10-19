@@ -23,14 +23,7 @@ export const Greeting = () => {
             duration: 5,
           }}
         >
-          <video 
-            loop 
-            height={300}
-            className='h-[300px]'
-            autoPlay 
-            muted
-            src="/Robot Wave Hand.mp4"
-          ></video>
+          <img src="/RobotWaveHand-ezgif.com-video-to-gif-converter (1).gif" className='h-[250px]' />
         </motion.div>
         <motion.span
           initial={{ opacity: 0 }}
