@@ -3,12 +3,7 @@ import {useNavigate } from 'react-router-dom';
 import { BASE_URL } from '@/api/api';
 import { CirclePlay, CirclePause } from 'lucide-react';
 
-interface Audio {
-    id: number;
-    title: string;
-    file_url: string;
-    uploaded_at: string;
-}
+type Audio = string;
 
 
 const AudioPlayer = ({lessonId}: {lessonId: string}) => {
@@ -20,18 +15,23 @@ const AudioPlayer = ({lessonId}: {lessonId: string}) => {
     const [currentTime, setCurrentTime] = useState<number>(0);
     const [duration, setDuration] = useState<number>(0);
     const STORAGE_KEY = `audio-${lessonId}-current-time`;
+    const [loading, setLoading] = useState(false);
+
 
     useEffect(() => {
         const fetchAudio = async () => {
+            setLoading(true);
             const url = `${BASE_URL}/lessons/${lessonId}/audio`;
             try {
                 const response = await fetch(url);
-                const data = await response.json();
+                const audioBlob = await response.blob();
+                const data = URL.createObjectURL(audioBlob)
                 setAudioData(data);
             } catch (error) {
                 console.error('Error fetching audio data:', error);
                 navigate('/not-found');
             }
+            setLoading(false);
         };
 
         fetchAudio();
@@ -157,31 +157,34 @@ const AudioPlayer = ({lessonId}: {lessonId: string}) => {
     }
 
     return (
-        <div className='max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-md flex items-end justify-between gap-4'>
-            {!isPlaying ? <CirclePlay className='w-8 h-8 object-cover' onClick={togglePlayPause}/> : <CirclePause className='w-8 h-8 object-cover' onClick={togglePlayPause}/>}
-            <div className="flex-1">
-            {/* <h2 className="text-2xl font-semibold mb-2">{audioData.title}</h2>
-            <p className="text-gray-600 mb-4">
-                Uploaded at: {new Date(audioData.uploaded_at).toLocaleString()}
-            </p> */}
-            <div>
-                <div className=" text-gray-700">
-                    {formatTime(currentTime)} / {formatTime(duration)}
-                </div>
-                <div
-                    className="w-full h-2 bg-gray-300 rounded mt-2 cursor-pointer relative"
-                    onClick={handleProgressClick}
-                >
+        <>
+            {loading && <p>Loading</p>}
+            {!loading && audioData && <div className='max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-md flex items-end justify-between gap-4'>
+                {!isPlaying ? <CirclePlay className='w-8 h-8 object-cover' onClick={togglePlayPause}/> : <CirclePause className='w-8 h-8 object-cover' onClick={togglePlayPause}/>}
+                <div className="flex-1">
+                {/* <h2 className="text-2xl font-semibold mb-2">{audioData.title}</h2>
+                <p className="text-gray-600 mb-4">
+                    Uploaded at: {new Date(audioData.uploaded_at).toLocaleString()}
+                </p> */}
+                <div>
+                    <div className=" text-gray-700">
+                        {formatTime(currentTime)} / {formatTime(duration)}
+                    </div>
                     <div
-                    className="h-full bg-blue-500 rounded"
-                    style={{ width: `${(currentTime / duration) * 100}%` }}
-                    ></div>
+                        className="w-full h-2 bg-gray-300 rounded mt-2 cursor-pointer relative"
+                        onClick={handleProgressClick}
+                    >
+                        <div
+                        className="h-full bg-blue-500 rounded"
+                        style={{ width: `${(currentTime / duration) * 100}%` }}
+                        ></div>
+                    </div>
+                    <audio ref={audioRef} src={audioData} />
                 </div>
-                <audio ref={audioRef} src={`http://commondatastorage.googleapis.com/codeskulptor-demos/DDR_assets/Kangaroo_MusiQue_-_The_Neverwritten_Role_Playing_Game.mp3`} />
-            </div>
-            
-            </div>
-        </div>
+                
+                </div>
+            </div>}
+        </>
       );
 }
 
