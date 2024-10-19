@@ -26,7 +26,7 @@ export const GlobalProvider: React.FC<GlobalProviderProps> = ({ children }) => {
   const [user, setUser] = useState<TelegramUser | null>(null);
   const [course, setCourseData] = useState<TCourse | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-
+  
   const setCourse = (course: TCourse | null) => {
     setCourseData(course);
   }
@@ -38,6 +38,7 @@ export const GlobalProvider: React.FC<GlobalProviderProps> = ({ children }) => {
       WebApp.ready();
 
       const userData = WebApp.initDataUnsafe.user;
+      console.log(userData);
       if (userData) {
         fetch(`https://telegram-mini-app-x496.onrender.com/users/`, {
           method: 'POST',

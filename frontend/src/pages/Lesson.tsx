@@ -24,9 +24,10 @@ interface LessonData {
 }
 
 
-  
+import AudioPlayer from '@/components/AudioPlayer';
 
 const BASE_URL = "https://telegram-mini-app-x496.onrender.com";
+
 import { useGlobalContext } from '@/context/GlobalContext';
 const Lesson = () => {
 
@@ -95,7 +96,7 @@ const Lesson = () => {
                     </div>
                 </div>
                 <Separator className="mt-8 h-1 rounded-3xl bg-blue-500" />
-                {/* {lessonId && <AudioPlayer lessonId={lessonId}/>} */}
+                {lessonId && <AudioPlayer lessonId={lessonId}/>}
                 <div className='mt-16'>
                     <h3 className='w-fit m-auto text-2xl font-semibold'>Введение</h3>
                 </div>
