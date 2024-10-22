@@ -4,6 +4,6 @@ bot link:
 
 
 backend documentation:
-[https://telegram-mini-app-x496.onrender.com/]
+[https://telegram-mini-app-x496.onrender.com/docs]
 
 
